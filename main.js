@@ -1,7 +1,6 @@
 emails = []
 
 function addNewCutie(){
-    console.log('working')
     cutie_name = document.getElementById('name').value;
     cutie_email = document.getElementById('email').value;
 
@@ -19,3 +18,18 @@ function addNewCutie(){
     friend_item = friend_list.children[num_emails - 1];
     friend_item.textContent += cutie_name;
 };
+
+function sendToCuties(){
+    sleigh_animation();
+    console.log('sent')
+};
+
+function sleigh_animation(){
+    sleigh_elem = document.getElementById('sleigh');
+    sleigh_elem.style.animation = 'slide-out 2.5s';
+};
+
+document.getElementById('sleigh').addEventListener('animationend', () => {
+    sleigh_elem = document.getElementById('sleigh');
+    sleigh_elem.style.animation = null;
+});
