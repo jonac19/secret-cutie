@@ -69,3 +69,38 @@ header .container h1{
   position: relative;
   box-sizing: border-box;
 }
+
+.information{
+  height: 100vh;
+}
+
+.divider{
+  margin: 10px 50px 50px 50px;
+  padding-top: 50px;
+  border-top: 3px solid #165b33;
+}
+
+.divider-name{
+  text-align: center;
+}
+
+.inputs{
+  display: flex;
+  justify-content: space-evenly;
+  font-family: Fraunces;
+  font-size: 1.5em;
+}
+
+.inputs form{
+  width: 40%;
+}
+
+.inputs input{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 10px;
+  font-family: Fraunces;
+  font-size: 0.75em;
+}
+
+
