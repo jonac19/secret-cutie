@@ -126,3 +126,17 @@ button{
   margin: 30px 0px;
   justify-content: center;
 }
+
+.friend-list{
+  margin: 0px 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #b3000c;
+  font-family: Fraunces-Italics;
+  font-size: 1.5em;
+}
+
+.friends-item{
+  margin: 10px 0px;
+  color: white;
+}
