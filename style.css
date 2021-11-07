@@ -99,8 +99,29 @@ header .container h1{
   box-sizing: border-box;
   width: 100%;
   padding: 10px 10px;
+  border-radius: 10px;
+  border: none;
   font-family: Fraunces;
   font-size: 0.75em;
+  outline: none;
 }
 
+.inputs input:focus{
+  border: 3px solid #b3000c;
+}
 
+button{
+  padding: 10px;
+  border: 3px solid #b3000c;
+  border-radius: 10px;
+  background-color: white;
+  text-align: center;
+  font-family: Fraunces;
+  font-size: 1em;
+}
+
+.button-input{
+  display: flex;
+  margin: 30px 0px;
+  justify-content: center;
+}
