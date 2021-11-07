@@ -112,13 +112,20 @@ header .container h1{
 
 button{
   padding: 10px;
-  border: 3px solid #b3000c;
   border-radius: 10px;
   color: black;
   background-color: white;
   text-align: center;
   font-family: Fraunces;
   font-size: 1em;
+}
+
+.button-red{
+  border: 3px solid #b3000c;
+}
+
+.button-green{
+  border: 3px solid #165b33;
 }
 
 .button-input{
@@ -137,6 +144,20 @@ button{
 }
 
 .friends-item{
-  margin: 10px 0px;
+  margin: 20px 0px;
+  padding-left: 20px;
   color: white;
 }
+
+.send{
+  display: flex;
+  margin-top: 20px;
+  margin-left: 300px;
+  align-items: center;
+}
+
+.send img{
+  height: 50px;
+}
+
+
