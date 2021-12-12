@@ -1,14 +1,63 @@
-emails = []
+const nodemailer = require('nodemailer')
+const { google } = require('googleapis');
 
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+const OAuth2 = google.auth.OAuth2
+const oAuth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
+
+async function sendMail(){
+    try{
+        //const accessToken = oAuth2Client.getAccessToken()
+        ***REMOVED***
+
+        const transport = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: 'secretcutietest@gmail.com',
+                clientId: CLIENT_ID,
+                clientSecret: CLIENT_SECRET,
+                refreshToken: REFRESH_TOKEN,
+                accessToken: accessToken
+            }
+        })
+
+        const mailOptions = {
+            from: 'SECRET CUTIE TEST <secretcutietest@gmail.com>',
+            to: 'secretcutietest@gmail.com',
+            subject: 'SECRET CUTIE TEST TEST',
+            text: 'PLEASE WORK',
+            html: '<h1>PLEASE WORK</h1>'
+        }
+
+        const result = transport.sendMail(mailOptions)
+        return result
+    } catch(error){
+        return error
+    }
+}
+
+sendMail().then((result)=> console.log('EMAIL SENT...', result))
+    
+
+
+const EMAILS = []
+
+/*
 function addNewCutie(){
     cutie_name = document.getElementById('name').value;
     cutie_email = document.getElementById('email').value;
 
-    emails.push(cutie_email);
+    EMAILS.push(cutie_email);
 
     friend_list = document.getElementById('friends');
 
-    num_emails = emails.length
+    num_emails = EMAILS.length
     if (num_emails > friend_list.children.length){
         new_friend_item = document.createElement("li");
         new_friend_item.classList.add("friends-item");
@@ -33,3 +82,4 @@ document.getElementById('sleigh').addEventListener('animationend', () => {
     sleigh_elem = document.getElementById('sleigh');
     sleigh_elem.style.animation = null;
 });
+*/
