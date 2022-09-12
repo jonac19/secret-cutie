@@ -1,14 +1,17 @@
 const EMAILS = []
 
-function addNewCutie(){
-    cutie_name = document.getElementById('name').value;
-    cutie_email = document.getElementById('email').value;
-
-    EMAILS.push(cutie_email);
-
+/**
+ * Adds new friend to email list
+ */
+function addNewFriend(){
+    friend_name = document.getElementById('name').value;
+    friend_email = document.getElementById('email').value;
     friend_list = document.getElementById('friends');
+    num_emails = EMAILS.length;
 
-    num_emails = EMAILS.length
+    EMAILS.push(friend_email);
+
+    // Extends friend list in view
     if (num_emails > friend_list.children.length){
         new_friend_item = document.createElement("li");
         new_friend_item.classList.add("friends-item");
@@ -16,19 +19,23 @@ function addNewCutie(){
     };
 
     friend_item = friend_list.children[num_emails - 1];
-    friend_item.textContent += cutie_name;
+    friend_item.textContent += friend_name;
 };
 
-function sendToCuties(){
+/**
+ * Sends secret santa invite to emails in email list
+ */
+function sendToFriends(){
     sleigh_animation();
-    console.log('sent')
-    //generateCutiePairs()
-    sendMail()
+    sendMail();
 };
 
+/**
+ * Animates sleigh element to slide out
+ */
 function sleigh_animation(){
     sleigh_elem = document.getElementById('sleigh');
-    sleigh_elem.style.animation = 'slide-out 2.5s';
+    sleigh_elem.style.animation = 'slide-out 2s';
 };
 
 document.getElementById('sleigh').addEventListener('animationend', () => {
@@ -36,15 +43,3 @@ document.getElementById('sleigh').addEventListener('animationend', () => {
     sleigh_elem.style.animation = null;
 });
 
-function generateCutiePairs(){
-    const emails_copy = EMAILS.copyWithin
-    const cutie_pairs = {}
-    const cutie_first = ''
-
-    for (const i = 0; i < EMAILS.length; i++){
-        if (cutie_first){
-            Math.random() * EMAILS.length
-        }
-    }
-    Math.random() * EMAILS_UNPAIRED
-}
