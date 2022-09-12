@@ -32,13 +32,15 @@
                     </div>
                 </div>
                 <div class="inputs">
-                    <form>
+                    <form onkeydown="return event.key != 'Enter';">
                         <label>Name</label>
                         <input id="name" type="text">
+                        <span id="name_error""></span>
                     </form>
-                    <form>
+                    <form onkeydown="return event.key != 'Enter';">
                         <label>Email</label>
                         <input id="email" type="email">
+                        <span id="email_error""></span>
                     </form>
                 </div>
                 <div class="button-input">
