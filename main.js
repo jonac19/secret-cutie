@@ -79,9 +79,47 @@ function validInput(name, email) {
 /**
  * Sends secret santa invite to emails in email list
  */
-function sendToFriends() {
+function sendEmails() {
     sleigh_animation()
-    sendMail()
+    emailMatches = generateEmailMatches()
+    for (email in emailMatches) {
+        sendEmail(EMAILS[email], email, EMAILS[emailMatches[email]], emailMatches[email])
+    }
+}
+
+function generateEmailMatches() {
+    emailMatches = {}
+    emailsAlreadyMatched = new Set()
+    emails = Object.keys(EMAILS)
+    for (let i = 0; i < emails.length; i++) {
+        do {
+            randEmail = emails[Math.floor(Math.random() * emails.length)]
+        } while (emailsAlreadyMatched.has(randEmail) || (randEmail == emails[i]))
+
+        emailMatches[emails[i]] = randEmail
+        emailsAlreadyMatched.add(randEmail)
+    }
+
+    return emailMatches
+}
+
+function sendEmail(name, email, friend_name, friend_email) {
+	Email.send({
+	Host: "smtp.elasticemail.com",
+	Username : getenv("EMAIL_USERNAME"),
+	Password : getenv("EMAIL_PASSWORD"),
+	To : email,
+	From : "Secret Cutie Application",
+	Subject : "Secret Cutie Invitation",
+	Body : `Season's Greetings ${name},
+        
+\tYou've been invited to a secret cutie event! Be prepared because your secret cutie is ${friend_name} under ${friend_email} Please keep this a secret and have a great gift exchange
+
+Happy Holidays,
+Secret Cutie`,
+	}).then(
+		message => alert("Mail sent successfully")
+	);
 }
 
 /**
@@ -90,10 +128,9 @@ function sendToFriends() {
 function sleigh_animation() {
     sleigh_elem = document.getElementById('sleigh')
     sleigh_elem.style.animation = 'slide-out 2s'
-}
 
-document.getElementById('sleigh').addEventListener('animationend', () => {
-    sleigh_elem = document.getElementById('sleigh')
-    sleigh_elem.style.animation = null
-})
+    sleigh_elem.addEventListener('animationend', () => {
+        sleigh_elem.style.animation = null
+    })
+}
 
