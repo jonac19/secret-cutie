@@ -1,4 +1,5 @@
 var EMAILS = {}
+require('dotenv').config()
 
 /**
  * Adds new friend to email list
