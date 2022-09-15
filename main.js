@@ -1,5 +1,4 @@
 var EMAILS = {}
-require('dotenv').config()
 
 /**
  * Adds new friend to email list
@@ -121,22 +120,7 @@ function generateEmailMatches() {
  * @param {String} friend_email The email of the friend assigned to the person
  */
 function sendEmail(name, email, friend_name, friend_email) {
-	Email.send({
-	Host: "smtp.elasticemail.com",
-	Username : process.env.EMAIL_USERNAME,
-	Password : process.env.EMAIL_PASSWORD,
-	To : email,
-	From : "Secret Cutie Application",
-	Subject : "Secret Cutie Invitation",
-	Body : `Season's Greetings ${name},
-        
-\tYou've been invited to a secret cutie event! Be prepared because your secret cutie is ${friend_name} under ${friend_email} Please keep this a secret and have a great gift exchange
-
-Happy Holidays,
-Secret Cutie`,
-	}).then(
-		message => alert("Mail sent successfully")
-	);
+	
 }
 
 /**
