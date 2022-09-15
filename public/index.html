@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Secret Cutie</title>
+        <link rel="stylesheet" type="text/css" href="style.css"></link>
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <img src="./images/SecretCutie-Logo.png">
+                <h1>Secret Cutie</h1>
+                <p></p>
+            </div>
+        </header>
+        <main>
+            <div class="banner">
+                <div class="banner-left">
+                    <img src="./images/SecretCutie-SideGraphicLeft-300px.png">
+                </div>
+                <div class="banner-text">
+                    <h1>Surprises for All!</h1>
+                    <h2>Time is Spent Better Together</h2>
+                </div>
+                <div class="banner-right">
+                    <img src="./images/SecretCutie-SideGraphicRight-300px.png">
+                </div>
+            </div>
+            <section class="information">
+                <div class="divider">
+                    <div class="divider-name">
+                        <h1><span class="step">Step 1: </span>Add Friends to Your Gift Exchange</h1>
+                    </div>
+                </div>
+                <div class="inputs">
+                    <form onkeydown="return event.key != 'Enter';">
+                        <label>Name</label>
+                        <input id="name" type="text" required>
+                        <span id="name_error""></span>
+                    </form>
+                    <form onkeydown="return event.key != 'Enter';">
+                        <label>Email</label>
+                        <input id="email" type="email" required>
+                        <span id="email_error""></span>
+                    </form>
+                </div>
+                <div class="button-input">
+                    <button class="button-red"onclick="addNewFriend()">Add Friend</button>
+                </div>
+            </section>
+            <section>
+                <div class="divider">
+                    <div class="divider-name">
+                        <h1><span class="step">Step 2: </span>Send It Out</h1>
+                    </div>
+                </div>
+                <div class="friend-list">
+                    <ol id="friends">
+                        <li class="friends-item"></li>
+                        <li class="friends-item"></li>
+                        <li class="friends-item"></li>
+                        <li class="friends-item"></li>
+                        <li class="friends-item"></li>
+                    </ol>
+                </div>
+                <div class="send">
+                    <button class="button-green" onclick="sendEmails()">Send!</button>
+                    <img id="sleigh" src="./images/SecretCutie-Sleigh.png">
+                </div>
+            </section>
+            <section>
+                <div class="divider">
+                    <div class="divider-name">
+                        <h1><span class="step">Step 3: </span>Wait for the Festive Season!</h1>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
