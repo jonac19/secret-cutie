@@ -87,6 +87,10 @@ function sendEmails() {
     }
 }
 
+/**
+ * Matches emails to another email that hasn't already been matched
+ * @returns {Object.<String, String>} Dictionary matching emails uniquely to another email
+ */
 function generateEmailMatches() {
     emailMatches = {}
     emailsAlreadyMatched = new Set()
@@ -103,6 +107,14 @@ function generateEmailMatches() {
     return emailMatches
 }
 
+/**
+ * Sends an email to the email address of the given person, providing the name and email address of the friend 
+ * the given person is assigned to
+ * @param {String} name         The name of the person
+ * @param {String} email        The email fo the person
+ * @param {String} friend_name  The name of the friend assigned to the person
+ * @param {String} friend_email The email of the friend assigned to the person
+ */
 function sendEmail(name, email, friend_name, friend_email) {
 	Email.send({
 	Host: "smtp.elasticemail.com",
