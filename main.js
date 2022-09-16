@@ -18,7 +18,7 @@ function addNewFriend() {
     FRIENDS.push([friendName, friendEmail])
 
     // Extends friend list in view
-    if (friendId <= friendList.children.length){
+    if (friendId >= friendList.children.length){
         newFriendItem = document.createElement("li")
         newFriendItem.classList.add("friends-item")
         friendList.appendChild(newFriendItem)
@@ -123,18 +123,18 @@ function matchFriends() {
  * @returns {List[Int]} List matching friend IDs uniquely to another friend ID
  */
 function generateFriendMatches() {
-    if (numFriends < 2) {
+    if (FRIENDS.length < 2) {
         return []
-    }
-
-    friendMatches = []
-    for (let i = 0; i < numFriends; i++) {
-        friendMatches.push(-1)
     }
 
     friendId = 0
     path = new Set()
     numFriends = FRIENDS.length
+    friendMatches = []
+    for (let i = 0; i < numFriends; i++) {
+        friendMatches.push(-1)
+    }
+
     while (path.size < numFriends - 1) {
         path.add(friendId)
         do {
