@@ -135,28 +135,43 @@ button{
 }
 
 .friend-list{
+  border: 1px solid black;
   margin: 0px 300px;
-  padding: 20px;
   border-radius: 10px;
   background-color: #b3000c;
   font-family: Fraunces-Italics;
   font-size: 1.5em;
+  display: flex;
 }
 
-.friends-item{
-  margin: 20px 0px;
+.friend-list ol{
+  width: 50%;
+}
+
+.friends-item, .match-item{
+  margin: 20px 20px;
   padding-left: 20px;
   color: white;
 }
 
-.send{
+.match-item{
+  list-style: none;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.match-item:hover{
+  background-color: #b3000c;
+}
+
+.match-button{
   display: flex;
   margin-top: 20px;
   margin-left: 300px;
   align-items: center;
 }
 
-.send img{
+.match-button img{
   height: 50px;
 }
 
