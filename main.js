@@ -1,30 +1,31 @@
-var EMAILS = {}
+var FRIENDS = []
 
 /**
- * Adds new friend to email list
+ * Adds new friend to friend list. Friends are identified by their friend ID 
+ * to retrieve their name and email.
  */
 function addNewFriend() {
-    friend_name = parseName(document.getElementById('name').value)
-    friend_email = parseEmail(document.getElementById('email').value)
-    friend_list = document.getElementById('friends')
-    num_emails = Object.keys(EMAILS).length
+    friendName = parseName(document.getElementById('name').value)
+    friendEmail = parseEmail(document.getElementById('email').value)
+    friendList = document.getElementById('friends')
+    friendId = FRIENDS.length
 
     // Check for valid name and email
-    if (!validInput(friend_name, friend_email)) {
+    if (!validInput(friendName, friendEmail)) {
         return
     }
 
-    EMAILS[friend_email] = friend_name
+    FRIENDS.push([friendName, friendEmail])
 
     // Extends friend list in view
-    if (num_emails > friend_list.children.length){
-        new_friend_item = document.createElement("li")
-        new_friend_item.classList.add("friends-item")
-        friend_list.appendChild(new_friend_item)
+    if (friendId <= friendList.children.length){
+        newFriendItem = document.createElement("li")
+        newFriendItem.classList.add("friends-item")
+        friendList.appendChild(newFriendItem)
     }
 
-    friend_item = friend_list.children[num_emails]
-    friend_item.textContent = friend_name
+    friendItem = friendList.children[friendId]
+    friendItem.textContent = friendName + "\t(" + friendEmail + ")"
 }
 
 /**
@@ -70,7 +71,7 @@ function validInput(name, email) {
     } else if (!/^\S+@\S+\.\S+$/.test(email)) {
         document.getElementById('email_error').textContent = "Email is invalid"
         valid = false
-    } else if (email in EMAILS) {
+    } else if (emailExists(email)) {
         document.getElementById('email_error').textContent = "Email already exists"
         valid = false
     } else {
@@ -81,57 +82,86 @@ function validInput(name, email) {
 }
 
 /**
- * Sends secret santa invite to emails in email list
+ * Determines the existence of the email, rejecting its acceptance if it already exists
+ * @param {String} email The email of the friend
+ * @returns Bool         Whether the email already exists in the friend list
  */
-function sendEmails() {
-    sleigh_animation()
-    emailMatches = generateEmailMatches()
-    for (email in emailMatches) {
-        sendEmail(EMAILS[email], email, EMAILS[emailMatches[email]], emailMatches[email])
+function emailExists(email) {
+    for (let friendId = 0; friendId < FRIENDS.length; friendId++) {
+        if (email == FRIENDS[friendId][1]) {
+            return true
+        }   
+    }
+    return false
+}
+
+/**
+ * Matches friends to another friend
+ */
+function matchFriends() {
+    sleighAnimation()
+    
+    friendMatches = generateFriendMatches()
+
+    // Displays matches in the view
+    matchList = document.getElementById('matches')
+    for (var friendId = 0; friendId < friendMatches.length; friendId++) {
+        if (friendId >= matchList.children.length){
+            newMatchItem = document.createElement("li")
+            newMatchItem.classList.add("match-item")
+            matchList.appendChild(newMatchItem)
+        }
+    
+        matchItem = matchList.children[friendId]
+        matchedFriendInfo = FRIENDS[friendMatches[friendId]]
+        matchItem.textContent = matchedFriendInfo[0] + "\t(" + matchedFriendInfo[1] + ")"
     }
 }
 
 /**
- * Matches emails to another email that hasn't already been matched
- * @returns {Object.<String, String>} Dictionary matching emails uniquely to another email
+ * Generates unique matches between friends
+ * @returns {List[Int]} List matching friend IDs uniquely to another friend ID
  */
-function generateEmailMatches() {
-    emailMatches = {}
-    emailsAlreadyMatched = new Set()
-    emails = Object.keys(EMAILS)
-    for (let i = 0; i < emails.length; i++) {
+function generateFriendMatches() {
+    if (numFriends < 2) {
+        return []
+    }
+
+    friendMatches = []
+    for (let i = 0; i < numFriends; i++) {
+        friendMatches.push(-1)
+    }
+
+    friendId = 0
+    path = new Set()
+    numFriends = FRIENDS.length
+    while (path.size < numFriends - 1) {
+        path.add(friendId)
         do {
-            randEmail = emails[Math.floor(Math.random() * emails.length)]
-        } while (emailsAlreadyMatched.has(randEmail) || (randEmail == emails[i]))
+            randFriendIndex = Math.floor(Math.random() * numFriends)
+        } while (
+            randFriendIndex == friendId ||
+            friendMatches[randFriendIndex] != -1 ||
+            path.has(randFriendIndex)
+        )
 
-        emailMatches[emails[i]] = randEmail
-        emailsAlreadyMatched.add(randEmail)
+        friendMatches[friendId] = randFriendIndex
+        friendId = randFriendIndex
     }
+    friendMatches[friendId] = 0
 
-    return emailMatches
-}
-
-/**
- * Sends an email to the email address of the given person, providing the name and email address of the friend 
- * the given person is assigned to
- * @param {String} name         The name of the person
- * @param {String} email        The email fo the person
- * @param {String} friend_name  The name of the friend assigned to the person
- * @param {String} friend_email The email of the friend assigned to the person
- */
-function sendEmail(name, email, friend_name, friend_email) {
-	
+    return friendMatches
 }
 
 /**
  * Animates sleigh element to slide out
  */
-function sleigh_animation() {
-    sleigh_elem = document.getElementById('sleigh')
-    sleigh_elem.style.animation = 'slide-out 2s'
+function sleighAnimation() {
+    sleighElem = document.getElementById('sleigh')
+    sleighElem.style.animation = 'slide-out 1s'
 
-    sleigh_elem.addEventListener('animationend', () => {
-        sleigh_elem.style.animation = null
+    sleighElem.addEventListener('animationend', () => {
+        sleighElem.style.animation = null
     })
 }
 
