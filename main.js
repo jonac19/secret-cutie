@@ -141,15 +141,17 @@ function generateFriendMatches() {
     }
 
     while (unmatchedIds.length > 0) {
-        do {
-            randIndex = Math.floor(Math.random() * unmatchedIds.length)
-            randFriendId = unmatchedIds[randIndex]
-        } while (
-            randFriendId == friendId ||
-            friendMatches[randFriendId] != -1
-        )
+        // Calculate random friend ID
+        randIndex = Math.floor(Math.random() * unmatchedIds.length)
+        randFriendId = unmatchedIds[randIndex]
+
+        // Match current friend with random friend
         friendMatches[friendId] = randFriendId
+
+        // Random friend becomes current friend
         friendId = randFriendId
+
+        // Remove random friend from the unmatched friend IDs pool
         unmatchedIds.splice(randIndex, 1)
     }
     friendMatches[friendId] = 0
