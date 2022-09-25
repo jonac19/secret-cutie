@@ -1,4 +1,4 @@
-var FRIENDS = []
+let FRIENDS = []
 
 /**
  * Adds new friend to friend list. Friends are identified by their friend ID 
