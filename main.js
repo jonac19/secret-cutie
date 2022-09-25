@@ -128,25 +128,29 @@ function generateFriendMatches() {
     }
 
     friendId = 0
-    path = new Set()
-    numFriends = FRIENDS.length
+    unmatchedIds = []
     friendMatches = []
+    numFriends = FRIENDS.length
+
     for (let i = 0; i < numFriends; i++) {
         friendMatches.push(-1)
+
+        if (i > 0) {
+            unmatchedIds.push(i)
+        }
     }
 
-    while (path.size < numFriends - 1) {
-        path.add(friendId)
+    while (unmatchedIds.length > 0) {
         do {
-            randFriendIndex = Math.floor(Math.random() * numFriends)
+            randIndex = Math.floor(Math.random() * unmatchedIds.length)
+            randFriendId = unmatchedIds[randIndex]
         } while (
-            randFriendIndex == friendId ||
-            friendMatches[randFriendIndex] != -1 ||
-            path.has(randFriendIndex)
+            randFriendId == friendId ||
+            friendMatches[randFriendId] != -1
         )
-
-        friendMatches[friendId] = randFriendIndex
-        friendId = randFriendIndex
+        friendMatches[friendId] = randFriendId
+        friendId = randFriendId
+        unmatchedIds.splice(randIndex, 1)
     }
     friendMatches[friendId] = 0
 
